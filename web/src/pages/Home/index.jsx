@@ -155,6 +155,37 @@ const Home = () => {
     clipPath:
       'polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px)',
   };
+  const isDarkMode = actualTheme === 'dark';
+  const bannerBgClass = isDarkMode
+    ? 'bg-[radial-gradient(circle_at_18%_12%,rgba(6,182,212,0.2),transparent_36%),radial-gradient(circle_at_82%_12%,rgba(168,85,247,0.18),transparent_34%),linear-gradient(180deg,#070B17_0%,#090E1C_56%,#0A0E1A_100%)]'
+    : 'bg-[radial-gradient(circle_at_18%_12%,rgba(6,182,212,0.12),transparent_38%),radial-gradient(circle_at_82%_12%,rgba(168,85,247,0.1),transparent_36%),linear-gradient(180deg,#F7FAFF_0%,#EFF6FF_56%,#F8FAFC_100%)]';
+  const gridOverlayClass = isDarkMode
+    ? 'bg-[linear-gradient(rgba(148,163,184,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.06)_1px,transparent_1px)] opacity-20'
+    : 'bg-[linear-gradient(rgba(30,41,59,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(30,41,59,0.08)_1px,transparent_1px)] opacity-30';
+  const scanClass = isDarkMode
+    ? 'bg-gradient-to-b from-cyan-400/25 via-cyan-300/10 to-transparent'
+    : 'bg-gradient-to-b from-cyan-500/12 via-cyan-400/8 to-transparent';
+  const baseUrlInputClass = isDarkMode
+    ? 'flex-1 !rounded-full !bg-[#0B1328]/85 !border !border-cyan-400/40 backdrop-blur-xl'
+    : 'flex-1 !rounded-full !bg-white/88 !border !border-cyan-500/25 backdrop-blur-xl';
+  const titleClass = isDarkMode
+    ? 'text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-fuchsia-300'
+    : 'text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-700 via-blue-700 to-fuchsia-700';
+  const featuredCardClass = isDarkMode
+    ? 'relative overflow-hidden rounded-2xl border border-blue-500/40 bg-gradient-to-br from-blue-500/20 to-transparent p-5 md:p-6'
+    : 'relative overflow-hidden rounded-2xl border border-blue-300/60 bg-gradient-to-br from-blue-200/55 to-white/80 p-5 md:p-6 shadow-[0_10px_28px_rgba(59,130,246,0.15)]';
+  const featuredTagClass = isDarkMode
+    ? 'text-xs font-medium tracking-wider text-blue-300 uppercase'
+    : 'text-xs font-medium tracking-wider text-blue-700 uppercase';
+  const priceClass = isDarkMode
+    ? 'mt-4 text-4xl font-extrabold text-cyan-300 drop-shadow-[0_0_16px_rgba(34,211,238,0.35)]'
+    : 'mt-4 text-4xl font-extrabold text-cyan-700';
+  const statCardLeftClass = isDarkMode
+    ? 'rounded-xl border border-cyan-500/30 bg-[#0D162E]/70 p-3'
+    : 'rounded-xl border border-cyan-300/55 bg-white/85 p-3';
+  const statCardRightClass = isDarkMode
+    ? 'rounded-xl border border-fuchsia-500/30 bg-[#13172B]/70 p-3'
+    : 'rounded-xl border border-fuchsia-300/55 bg-white/85 p-3';
 
   return (
     <div className='w-full overflow-x-hidden'>
@@ -178,14 +209,18 @@ const Home = () => {
       {homePageContentLoaded && homePageContent === '' ? (
         <div className='w-full overflow-x-hidden'>
           {/* Banner 部分 */}
-          <div className='w-full border-b border-cyan-500/20 min-h-[500px] md:min-h-[600px] lg:min-h-[700px] relative overflow-x-hidden bg-[radial-gradient(circle_at_18%_12%,rgba(6,182,212,0.2),transparent_36%),radial-gradient(circle_at_82%_12%,rgba(168,85,247,0.18),transparent_34%),linear-gradient(180deg,#070B17_0%,#090E1C_56%,#0A0E1A_100%)]'>
+          <div
+            className={`w-full border-b border-cyan-500/20 min-h-[500px] md:min-h-[600px] lg:min-h-[700px] relative overflow-x-hidden ${bannerBgClass}`}
+          >
             {/* 背景模糊晕染球 */}
-            <div className='blur-ball blur-ball-indigo opacity-60' />
-            <div className='blur-ball blur-ball-teal opacity-60' />
-            <div className='absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.06)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20 pointer-events-none' />
+            <div className={`blur-ball blur-ball-indigo ${isDarkMode ? 'opacity-60' : 'opacity-35'}`} />
+            <div className={`blur-ball blur-ball-teal ${isDarkMode ? 'opacity-60' : 'opacity-35'}`} />
+            <div
+              className={`absolute inset-0 ${gridOverlayClass} bg-[size:32px_32px] pointer-events-none`}
+            />
             <div className='absolute inset-0 pointer-events-none overflow-hidden'>
               <div
-                className='absolute inset-x-0 h-28 bg-gradient-to-b from-cyan-400/25 via-cyan-300/10 to-transparent blur-sm'
+                className={`absolute inset-x-0 h-28 ${scanClass} blur-sm`}
                 style={{ animation: 'hud-scan 7s linear infinite' }}
               />
             </div>
@@ -210,7 +245,7 @@ const Home = () => {
                     <Input
                       readonly
                       value={serverAddress}
-                      className='flex-1 !rounded-full !bg-[#0B1328]/85 !border !border-cyan-400/40 backdrop-blur-xl'
+                      className={baseUrlInputClass}
                       size={isMobile ? 'default' : 'large'}
                       suffix={
                         <div className='flex items-center gap-2'>
@@ -278,7 +313,7 @@ const Home = () => {
                     />
                   </div>
                   <div className='text-center'>
-                    <h2 className='text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-fuchsia-300'>
+                    <h2 className={titleClass}>
                       {t('订阅套餐中心')}
                     </h2>
                     <p className='mt-3 text-sm md:text-base text-semi-color-text-2'>
@@ -290,135 +325,89 @@ const Home = () => {
                       {t('加载中...')}
                     </div>
                   ) : subscriptionPlans.length > 0 ? (
-                    <div className='mt-8 grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-5'>
-                      <div
-                        className={`relative overflow-hidden rounded-2xl border border-blue-500/40 bg-gradient-to-br from-blue-500/20 to-transparent p-5 md:p-6 ${
-                          secondaryPlans.length > 0
-                            ? 'lg:col-span-2'
-                            : 'lg:col-span-5 lg:max-w-xl w-full mx-auto'
-                        }`}
-                        style={hudCutStyle}
-                      >
-                        <div className='pointer-events-none absolute top-2 left-2 w-5 h-5 border-t border-l border-cyan-300/45' />
-                        <div className='pointer-events-none absolute top-2 right-2 w-5 h-5 border-t border-r border-cyan-300/45' />
-                        <div className='pointer-events-none absolute bottom-2 left-2 w-5 h-5 border-b border-l border-cyan-300/35' />
-                        <div className='pointer-events-none absolute bottom-2 right-2 w-5 h-5 border-b border-r border-cyan-300/35' />
-                        <div className='text-xs font-medium tracking-wider text-blue-300 uppercase'>
-                          {t('推荐套餐')}
-                        </div>
-                        <div className='mt-3 text-2xl md:text-3xl font-bold text-semi-color-text-0'>
-                          {featuredPlan?.title || t('订阅套餐')}
-                        </div>
-                        {featuredPlan && (
-                          <>
-                            <div className='mt-4 text-4xl font-extrabold text-cyan-300 drop-shadow-[0_0_16px_rgba(34,211,238,0.35)]'>
-                              ${Number(featuredPlan.price_amount || 0).toFixed(2)}
-                              <span className='ml-1 text-sm font-medium text-semi-color-text-2'>
-                                USD
-                              </span>
+                    <div className='mt-12 flex flex-wrap justify-center items-stretch gap-6 px-4'>
+                      {subscriptionPlans.map((item, index) => {
+                        const plan = item?.plan || {};
+                        const isPopular = index === 0;
+                        const totalAmount = Number(plan?.total_amount || 0);
+                        const price = Number(plan?.price_amount || 0).toFixed(2);
+                        const limit = Number(plan?.max_purchase_per_user || 0);
+
+                        return (
+                          <div
+                            key={plan?.id || index}
+                            className={`relative flex flex-col p-6 border border-gray-700/50 bg-[#0B1328]/80 backdrop-blur-sm w-full md:w-80 transition-all duration-300 hover:scale-[1.02] ${
+                              isPopular ? 'md:w-80 border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.15)] z-10' : 'hover:border-blue-500/30'
+                            }`}
+                          >
+                            {/* Corner Brackets */}
+                            <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-white/80"></div>
+                            <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-white/80"></div>
+                            <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-white/80"></div>
+                            <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-white/80"></div>
+
+                            {isPopular && (
+                              <div className="absolute -top-8 left-0 right-0 text-center">
+                                <span className="text-white text-sm font-bold tracking-wider">{t('推荐套餐')}</span>
+                              </div>
+                            )}
+
+                            <h3 className="text-2xl font-bold text-white text-center mt-4 mb-2">
+                              {plan?.title || t('订阅套餐')}
+                            </h3>
+
+                            <div className="text-center mb-6">
+                              <div className="flex items-baseline justify-center text-white">
+                                <span className="text-2xl font-bold mr-1">$</span>
+                                <span className="text-5xl font-extrabold tracking-tight">{price}</span>
+                                <span className="text-sm text-gray-400 ml-2 font-medium">USD</span>
+                              </div>
                             </div>
-                            <div className='mt-4 space-y-2 text-sm text-semi-color-text-1'>
-                              <div>
-                                {t('有效期')}: {formatSubscriptionDuration(featuredPlan, t)}
+
+                            <div className="flex-1 space-y-4 text-center text-gray-300 text-sm mb-8 px-4">
+                              <div className="flex items-center justify-center gap-2">
+                                <span>{t('有效期')}:</span>
+                                <span className="text-white font-medium">{formatSubscriptionDuration(plan, t)}</span>
                               </div>
-                              <div>
-                                {t('总额度')}:{' '}
-                                {Number(featuredPlan.total_amount || 0) > 0
-                                  ? renderQuota(Number(featuredPlan.total_amount || 0))
-                                  : t('不限')}
+                              <div className="flex items-center justify-center gap-2">
+                                <span>{t('总额度')}:</span>
+                                <span className="text-white font-medium">
+                                  {totalAmount > 0 ? renderQuota(totalAmount) : t('不限')}
+                                </span>
                               </div>
-                              {Number(featuredPlan.max_purchase_per_user || 0) > 0 && (
-                                <div>
-                                  {t('限购')} {Number(featuredPlan.max_purchase_per_user)}
+                              {limit > 0 && (
+                                <div className="flex items-center justify-center gap-2">
+                                  <span>{t('限购')}:</span>
+                                  <span className="text-white font-medium">{limit}</span>
                                 </div>
                               )}
                             </div>
-                            <Link to='/console/topup'>
+
+                            <Link to='/console/topup' className="w-full">
                               <Button
-                                type='primary'
                                 theme='solid'
-                                className='!rounded-2xl mt-6 w-full !border-0 !bg-gradient-to-r !from-cyan-500 !to-blue-500 shadow-[0_0_22px_rgba(34,211,238,0.35)]'
+                                type='primary'
+                                className='w-full !rounded-full !font-bold !bg-blue-500 hover:!bg-blue-600 !border-none !h-10 !text-base shadow-lg shadow-blue-500/20'
                               >
                                 {t('立即订阅')}
                               </Button>
                             </Link>
-                          </>
-                        )}
-                        <div className='mt-6 grid grid-cols-2 gap-3'>
-                          <div className='rounded-xl border border-cyan-500/30 bg-[#0D162E]/70 p-3'>
-                            <div className='text-xs text-semi-color-text-2'>
-                              {t('可选套餐')}
-                            </div>
-                            <div className='mt-1 text-xl font-bold text-semi-color-text-0'>
-                              {subscriptionPlans.length}
-                            </div>
-                          </div>
-                          <div className='rounded-xl border border-fuchsia-500/30 bg-[#13172B]/70 p-3'>
-                            <div className='text-xs text-semi-color-text-2'>
-                              {t('最高档位')}
-                            </div>
-                            <div className='mt-1 text-xl font-bold text-semi-color-text-0'>
-                              ${highestPricePlan.toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {secondaryPlans.length > 0 && (
-                        <div className='lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5'>
-                          {secondaryPlans.map((item, index) => {
-                          const plan = item?.plan || {};
-                          const totalAmount = Number(plan?.total_amount || 0);
-                          const limit = Number(plan?.max_purchase_per_user || 0);
-                          const isPopular = index === 0;
-                          return (
-                            <div
-                              key={plan?.id || `${plan?.title || 'plan'}-${index}`}
-                              className={`relative overflow-hidden rounded-2xl border p-5 backdrop-blur-md ${isPopular ? 'border-fuchsia-400/60 bg-fuchsia-500/10 shadow-[0_0_24px_rgba(217,70,239,0.2)]' : 'border-cyan-500/25 bg-[#0B1328]/70'}`}
-                              style={hudCutStyle}
-                            >
-                              <div className='pointer-events-none absolute top-2 left-2 w-4 h-4 border-t border-l border-cyan-300/35' />
-                              <div className='pointer-events-none absolute bottom-2 right-2 w-4 h-4 border-b border-r border-cyan-300/25' />
-                              <div className='text-base font-semibold text-semi-color-text-0'>
-                                {plan?.title || t('订阅套餐')}
-                              </div>
-                              <div className='mt-2 text-2xl font-bold text-semi-color-text-0'>
-                                ${Number(plan?.price_amount || 0).toFixed(2)}
-                                <span className='text-xs font-normal text-semi-color-text-2 ml-1'>
-                                  USD
-                                </span>
-                              </div>
-                              <div className='mt-3 space-y-1.5 text-xs text-semi-color-text-1'>
-                                <div>
-                                  {t('有效期')}: {formatSubscriptionDuration(plan, t)}
+
+                            {isPopular && (
+                              <div className="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-gray-700/50">
+                                <div className="text-center border border-gray-700/50 rounded-lg p-2 bg-white/5">
+                                  <div className="text-xs text-gray-400 mb-1">{t('可选套餐')}</div>
+                                  <div className="text-white font-bold text-lg">{subscriptionPlans.length}</div>
                                 </div>
-                                <div>
-                                  {t('总额度')}:{' '}
-                                  {totalAmount > 0 ? renderQuota(totalAmount) : t('不限')}
+                                <div className="text-center border border-gray-700/50 rounded-lg p-2 bg-white/5">
+                                  <div className="text-xs text-gray-400 mb-1">{t('最高档位')}</div>
+                                  <div className="text-white font-bold text-lg">${highestPricePlan.toFixed(2)}</div>
                                 </div>
-                                {limit > 0 && (
-                                  <div>
-                                    {t('限购')} {limit}
-                                  </div>
-                                )}
                               </div>
-                              <Link to='/console/topup'>
-                                <Button
-                                  type={isPopular ? 'primary' : 'tertiary'}
-                                  theme='solid'
-                                  className={`!rounded-xl mt-4 w-full ${
-                                    isPopular
-                                      ? '!border-0 !bg-gradient-to-r !from-fuchsia-500 !to-purple-500'
-                                      : '!bg-[#16203B] !border !border-cyan-400/35 !text-cyan-200'
-                                  }`}
-                                >
-                                  {t('立即订阅')}
-                                </Button>
-                              </Link>
-                            </div>
-                          );
-                          })}
-                        </div>
-                      )}
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   ) : (
                     <div className='text-center text-semi-color-text-2 text-sm py-8'>

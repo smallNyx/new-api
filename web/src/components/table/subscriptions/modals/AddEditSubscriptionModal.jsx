@@ -83,6 +83,7 @@ const AddEditSubscriptionModal = ({
   const getInitValues = () => ({
     title: '',
     subtitle: '',
+    description: '',
     price_amount: 0,
     currency: 'USD',
     duration_unit: 'month',
@@ -107,6 +108,7 @@ const AddEditSubscriptionModal = ({
       ...base,
       title: p.title || '',
       subtitle: p.subtitle || '',
+      description: p.description || '',
       price_amount: Number(p.price_amount || 0),
       currency: 'USD',
       duration_unit: p.duration_unit || 'month',
@@ -291,6 +293,16 @@ const AddEditSubscriptionModal = ({
                         field='subtitle'
                         label={t('套餐副标题')}
                         placeholder={t('例如：适合轻度使用')}
+                        showClear
+                      />
+                    </Col>
+
+                    <Col span={24}>
+                      <Form.TextArea
+                        field='description'
+                        label={t('详细介绍')}
+                        placeholder={t('每行一条特性，例如：\n支持 GPT-4\n专属客服支持\n优先响应')}
+                        autosize={{ minRows: 3, maxRows: 6 }}
                         showClear
                       />
                     </Col>
