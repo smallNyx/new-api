@@ -1,0 +1,32 @@
+services:
+  backend:
+    image: ${BACKEND_IMAGE:-ymy2345/api:backend-latest}
+    container_name: new-api-backend
+    restart: always
+    command: --log-dir /app/logs
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    env_file:
+      - .env
+    environment:
+      - PORT=3000
+    volumes:
+      - ./data:/data
+      - ./logs:/app/logs
+    ports:
+      - "${BACKEND_PORT:-13023}:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/api/status | grep -o '\"success\":\\s*true' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    image: ${FRONTEND_IMAGE:-ymy2345/api:frontend-latest}
+    container_name: new-api-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
