@@ -220,6 +220,32 @@ const InvitationCard = ({
               </Text>
             </div>
           </div>
+                {/* Contact Info Section */}
+      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="text-center">
+          <Typography.Title heading={5} style={{ marginBottom: '16px' }}>
+            {t('联系客服进行充值，套餐兑换')}
+          </Typography.Title>
+          <div className="flex justify-center gap-8 flex-wrap">
+            <div className="flex flex-col items-center">
+              <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center mb-2 overflow-hidden border border-gray-200">
+                 <img src="/wechat-qr.png" alt="WeChat QR" className="w-full h-full object-cover" />
+              </div>
+              <Text className="text-sm text-gray-600">{t('扫码添加客服')}</Text>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center mb-2 overflow-hidden border border-gray-200">
+                 <img src="/mp-qr.png" alt="Official Account QR" className="w-full h-full object-cover" />
+              </div>
+              <Text className="text-sm text-gray-600">{t('官方客服群')}</Text>
+            </div>
+          </div>
+          <div className="mt-4 flex justify-center items-center gap-2">
+            <Text type="secondary">{t('微信号')}:</Text>
+            <Text strong copyable={{ content: 'keyflow_VIP' }}>keyflow_VIP</Text>
+          </div>
+        </div>
+      </div>
         </Card>
       </Space>
     </Card>

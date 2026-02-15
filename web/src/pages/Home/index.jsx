@@ -319,6 +319,9 @@ const Home = () => {
                     <p className='mt-3 text-sm md:text-base text-semi-color-text-2'>
                       {t('按业务阶段灵活选择，开通后立即生效')}
                     </p>
+                    <p className='mt-3 text-sm md:text-base text-semi-color-text-2'>
+                      {t('解锁Claude,OpenAI等主流大模型(详见模型广场)')}
+                    </p>
                   </div>
                   {subscriptionLoading ? (
                     <div className='text-center text-semi-color-text-2 text-sm py-8'>
@@ -336,49 +339,49 @@ const Home = () => {
                         return (
                           <div
                             key={plan?.id || index}
-                            className={`relative flex flex-col p-6 border border-gray-700/50 bg-[#0B1328]/80 backdrop-blur-sm w-full md:w-80 transition-all duration-300 hover:scale-[1.02] ${
+                            className={`relative flex flex-col p-6 border border-gray-200 dark:border-gray-700/50 bg-white/80 dark:bg-[#0B1328]/80 backdrop-blur-sm w-full md:w-80 transition-all duration-300 hover:scale-[1.02] ${
                               isPopular ? 'md:w-80 border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.15)] z-10' : 'hover:border-blue-500/30'
                             }`}
                           >
                             {/* Corner Brackets */}
-                            <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-white/80"></div>
-                            <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-white/80"></div>
-                            <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-white/80"></div>
-                            <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-white/80"></div>
+                            <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-gray-800 dark:border-white/80"></div>
+                            <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-gray-800 dark:border-white/80"></div>
+                            <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-gray-800 dark:border-white/80"></div>
+                            <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-gray-800 dark:border-white/80"></div>
 
                             {isPopular && (
                               <div className="absolute -top-8 left-0 right-0 text-center">
-                                <span className="text-white text-sm font-bold tracking-wider">{t('推荐套餐')}</span>
+                                <span className="text-gray-800 dark:text-white text-sm font-bold tracking-wider">{t('推荐套餐')}</span>
                               </div>
                             )}
 
-                            <h3 className="text-2xl font-bold text-white text-center mt-4 mb-2">
+                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mt-4 mb-2">
                               {plan?.title || t('订阅套餐')}
                             </h3>
 
                             <div className="text-center mb-6">
-                              <div className="flex items-baseline justify-center text-white">
+                              <div className="flex items-baseline justify-center text-gray-800 dark:text-white">
                                 <span className="text-2xl font-bold mr-1">$</span>
                                 <span className="text-5xl font-extrabold tracking-tight">{price}</span>
-                                <span className="text-sm text-gray-400 ml-2 font-medium">USD</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-400 ml-2 font-medium">USD</span>
                               </div>
                             </div>
 
-                            <div className="flex-1 space-y-4 text-center text-gray-300 text-sm mb-8 px-4">
+                            <div className="flex-1 space-y-4 text-center text-gray-600 dark:text-gray-300 text-sm mb-8 px-4">
                               <div className="flex items-center justify-center gap-2">
                                 <span>{t('有效期')}:</span>
-                                <span className="text-white font-medium">{formatSubscriptionDuration(plan, t)}</span>
+                                <span className="text-gray-800 dark:text-white font-medium">{formatSubscriptionDuration(plan, t)}</span>
                               </div>
                               <div className="flex items-center justify-center gap-2">
                                 <span>{t('总额度')}:</span>
-                                <span className="text-white font-medium">
+                                <span className="text-gray-800 dark:text-white font-medium">
                                   {totalAmount > 0 ? renderQuota(totalAmount) : t('不限')}
                                 </span>
                               </div>
                               {limit > 0 && (
                                 <div className="flex items-center justify-center gap-2">
                                   <span>{t('限购')}:</span>
-                                  <span className="text-white font-medium">{limit}</span>
+                                  <span className="text-gray-800 dark:text-white font-medium">{limit}</span>
                                 </div>
                               )}
                             </div>
@@ -394,14 +397,14 @@ const Home = () => {
                             </Link>
 
                             {isPopular && (
-                              <div className="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-gray-700/50">
-                                <div className="text-center border border-gray-700/50 rounded-lg p-2 bg-white/5">
-                                  <div className="text-xs text-gray-400 mb-1">{t('可选套餐')}</div>
-                                  <div className="text-white font-bold text-lg">{subscriptionPlans.length}</div>
+                              <div className="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700/50">
+                                <div className="text-center border border-gray-200 dark:border-gray-700/50 rounded-lg p-2 bg-gray-50 dark:bg-white/5">
+                                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('可选套餐')}</div>
+                                  <div className="text-gray-800 dark:text-white font-bold text-lg">{subscriptionPlans.length}</div>
                                 </div>
-                                <div className="text-center border border-gray-700/50 rounded-lg p-2 bg-white/5">
-                                  <div className="text-xs text-gray-400 mb-1">{t('最高档位')}</div>
-                                  <div className="text-white font-bold text-lg">${highestPricePlan.toFixed(2)}</div>
+                                <div className="text-center border border-gray-200 dark:border-gray-700/50 rounded-lg p-2 bg-gray-50 dark:bg-white/5">
+                                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{t('最高档位')}</div>
+                                  <div className="text-gray-800 dark:text-white font-bold text-lg">${highestPricePlan.toFixed(2)}</div>
                                 </div>
                               </div>
                             )}

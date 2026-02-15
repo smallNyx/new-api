@@ -541,11 +541,11 @@ const SubscriptionPlansCard = ({
                     <div className={`absolute -inset-0.5 bg-gradient-to-r from-green-600 to-green-400 rounded-2xl opacity-20 group-hover:opacity-100 transition duration-300 blur-sm ${isPopular ? 'opacity-60' : ''}`}></div>
                     
                     {/* Card Content */}
-                    <div className="relative h-full bg-[#18181b] rounded-2xl p-6 border border-gray-800 flex flex-col text-gray-200">
+                    <div className="relative h-full bg-white dark:bg-[#18181b] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 flex flex-col text-gray-800 dark:text-gray-200 shadow-sm dark:shadow-none">
                       {/* Popular Badge */}
                       {isPopular && (
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                          <span className="bg-green-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-lg shadow-green-500/20 flex items-center gap-1">
+                          <span className="bg-green-500 text-white dark:text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-lg shadow-green-500/20 flex items-center gap-1">
                             <Sparkles size={12} />
                             {t('推荐')}
                           </span>
@@ -554,21 +554,21 @@ const SubscriptionPlansCard = ({
 
                       {/* Header */}
                       <div className="text-center mb-6 mt-2">
-                        <h3 className="text-xl font-bold text-green-500 uppercase tracking-wider mb-2">
+                        <h3 className="text-xl font-bold text-green-600 dark:text-green-500 uppercase tracking-wider mb-2">
                           {plan?.title || t('订阅套餐')}
                         </h3>
-                        <div className="flex items-baseline justify-center text-green-400">
+                        <div className="flex items-baseline justify-center text-green-600 dark:text-green-400">
                           <span className="text-2xl font-bold mr-1">{symbol}</span>
                           <span className="text-4xl font-extrabold tracking-tight">{displayPrice}</span>
                         </div>
                         {plan?.subtitle && (
-                          <div className="text-gray-500 text-sm mt-2 font-medium">
+                          <div className="text-gray-500 dark:text-gray-400 text-sm mt-2 font-medium">
                             {plan.subtitle}
                           </div>
                         )}
                       </div>
 
-                      <div className="h-px bg-gray-800 w-full mb-6"></div>
+                      <div className="h-px bg-gray-200 dark:bg-gray-800 w-full mb-6"></div>
 
                       {/* Features */}
                       <div className="flex-1 space-y-4 mb-8">
@@ -576,9 +576,9 @@ const SubscriptionPlansCard = ({
                           <Tooltip key={i} content={item.tooltip || null} position="top">
                             <div className="flex items-start gap-3 group/item">
                               <div className="mt-0.5 bg-green-500/10 p-1 rounded-full group-hover/item:bg-green-500/20 transition-colors">
-                                <Check className="w-3 h-3 text-green-500" />
+                                <Check className="w-3 h-3 text-green-600 dark:text-green-500" />
                               </div>
-                              <span className="text-sm text-gray-300 leading-tight font-medium">
+                              <span className="text-sm text-gray-600 dark:text-gray-300 leading-tight font-medium">
                                 {item.label}
                               </span>
                             </div>
@@ -594,8 +594,8 @@ const SubscriptionPlansCard = ({
                         disabled={reached}
                         className={`w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2
                           ${reached 
-                            ? 'bg-gray-800 text-gray-500 cursor-not-allowed' 
-                            : 'bg-green-500 hover:bg-green-400 text-black shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transform hover:-translate-y-0.5'
+                            ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed' 
+                            : 'bg-green-600 dark:bg-green-500 hover:bg-green-500 dark:hover:bg-green-400 text-white dark:text-black shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transform hover:-translate-y-0.5'
                           }`}
                       >
                         {reached ? (
@@ -610,7 +610,7 @@ const SubscriptionPlansCard = ({
                       </button>
                       
                       {reached && tip && (
-                        <div className="text-center mt-2 text-xs text-red-400">
+                        <div className="text-center mt-2 text-xs text-red-500 dark:text-red-400">
                           {tip}
                         </div>
                       )}
@@ -620,7 +620,7 @@ const SubscriptionPlansCard = ({
               })}
             </div>
           ) : (
-            <div className='text-center text-gray-400 text-sm py-4'>
+            <div className='text-center text-gray-500 dark:text-gray-400 text-sm py-4'>
               {t('暂无可购买套餐')}
             </div>
           )}
