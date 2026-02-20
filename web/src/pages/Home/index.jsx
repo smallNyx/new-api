@@ -36,10 +36,68 @@ import {
   IconGithubLogo,
   IconPlay,
   IconCopy,
+  IconCheckCircleStroked,
 } from '@douyinfe/semi-icons';
 import { Link } from 'react-router-dom';
 import NoticeModal from '../../components/layout/NoticeModal';
 import { formatSubscriptionDuration } from '../../helpers/subscriptionFormat';
+
+const STATIC_SUBSCRIPTION_PLANS = [
+  {
+    plan: {
+      id: 1,
+      title: '入门套餐',
+      price_amount: 5,
+      currency: 'USD',
+      total_amount: 5000000,
+      max_purchase_per_user: 0,
+      duration_unit: 'month',
+      duration_value: 1,
+      features: [
+        { text: '支持基础模型(GPT-5.3/Claude-4.6)', enabled: true },
+        { text: '标准API响应速度', enabled: true },
+        { text: '基础并发限制', enabled: true },
+        { text: '7x24小时社区支持', enabled: true },
+      ],
+    },
+  },
+  {
+    plan: {
+      id: 2,
+      title: '标准套餐',
+      price_amount: 20,
+      currency: 'USD',
+      total_amount: 25000000,
+      max_purchase_per_user: 0,
+      duration_unit: 'month',
+      duration_value: 1,
+      features: [
+        { text: '支持基础模型(GPT-5.3/Claude-4.6)', enabled: true },
+        { text: '标准API响应速度', enabled: true },
+        { text: '基础并发限制', enabled: true },
+        { text: '7x24小时社区支持', enabled: true },
+      ],
+    },
+  },
+  {
+    plan: {
+      id: 3,
+      title: '高级套餐',
+      price_amount: 100,
+      currency: 'USD',
+      total_amount: 150000000,
+      max_purchase_per_user: 0,
+      duration_unit: 'month',
+      duration_value: 1,
+      features: [
+        { text: '支持基础模型(GPT-5.3/Claude-4.6)', enabled: true },
+        { text: '标准API响应速度', enabled: true },
+        { text: '基础并发限制', enabled: true },
+        { text: '7x24小时社区支持', enabled: true },
+      ],
+    },
+  },
+];
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -54,8 +112,8 @@ const Home = () => {
     statusState?.status?.server_address || `${window.location.origin}`;
   const endpointItems = API_ENDPOINTS.map((e) => ({ value: e }));
   const [endpointIndex, setEndpointIndex] = useState(0);
-  const [subscriptionPlans, setSubscriptionPlans] = useState([]);
-  const [subscriptionLoading, setSubscriptionLoading] = useState(true);
+  const [subscriptionPlans, setSubscriptionPlans] = useState(STATIC_SUBSCRIPTION_PLANS);
+  const [subscriptionLoading, setSubscriptionLoading] = useState(false);
   const isChinese = i18n.language.startsWith('zh');
 
   const displayHomePageContent = async () => {
@@ -94,21 +152,6 @@ const Home = () => {
     }
   };
 
-  const getSubscriptionPlans = async () => {
-    setSubscriptionLoading(true);
-    try {
-      const res = await API.get('/api/subscription/plans');
-      if (res.data?.success) {
-        setSubscriptionPlans(res.data.data || []);
-      } else {
-        setSubscriptionPlans([]);
-      }
-    } catch (e) {
-      setSubscriptionPlans([]);
-    } finally {
-      setSubscriptionLoading(false);
-    }
-  };
 
   useEffect(() => {
     const checkNoticeAndShow = async () => {
@@ -132,7 +175,6 @@ const Home = () => {
 
   useEffect(() => {
     displayHomePageContent().then();
-    getSubscriptionPlans().then();
   }, []);
 
   useEffect(() => {
@@ -382,6 +424,19 @@ const Home = () => {
                                 <div className="flex items-center justify-center gap-2">
                                   <span>{t('限购')}:</span>
                                   <span className="text-gray-800 dark:text-white font-medium">{limit}</span>
+                                </div>
+                              )}
+
+                              {plan.features && plan.features.length > 0 && (
+                                <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700/50 space-y-2 text-left">
+                                  {plan.features.map((feature, idx) => (
+                                    <div key={idx} className="flex items-start gap-2">
+                                      <IconCheckCircleStroked className="text-cyan-500 mt-0.5 shrink-0" />
+                                      <span className={`text-sm ${feature.enabled ? 'text-gray-700 dark:text-gray-200' : 'text-gray-400 line-through'}`}>
+                                        {feature.text}
+                                      </span>
+                                    </div>
+                                  ))}
                                 </div>
                               )}
                             </div>

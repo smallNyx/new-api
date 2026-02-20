@@ -26,7 +26,7 @@ docker build -f Dockerfile.backend -t "${BACKEND_IMAGE}" .
 
 echo "==> 构建前端镜像: ${FRONTEND_IMAGE}"
 docker build -f Dockerfile.frontend -t "${FRONTEND_IMAGE}" .
-
+docker build -f Dockerfile.frontend -t ymy2345/api_web:0.1.1  .
 echo "==> 推送后端镜像"
 docker push "${BACKEND_IMAGE}"
 
